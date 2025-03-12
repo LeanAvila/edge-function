@@ -49,30 +49,37 @@ const onIssue = (payload: GitHubIssuePayload): string => {
 
 export default async (req: Request, context: Context) => {
 
-    // const resultado = await notify('Hola mundo desde netlify!');
-
     const githubEvent = req.headers.get('X-GitHub-Event') ?? 'uknown';
     const payload = await req.json() ?? '{}';
 
-    console.log(payload)
+    // console.log(payload)
 
-    // let message: string;
+    let message: string;
     
-    // switch (githubEvent) {
+    switch (githubEvent) {
 
-    //     case 'star':
-    //         message = onStar(payload);
-    //         break;
+        case 'star':
+            message = onStar(payload);
+            break;
 
-    //     case 'issues': 
-    //         message = onIssue(payload);
-    //         break;
+        case 'issues': 
+            message = onIssue(payload);
+            break;
 
-    //     default:
-    //         message = `event ${githubEvent} unknown`;
+        default:
+            message = `event ${githubEvent} unknown`;
 
-    // }
+    }
 
+    const wasNotified = await notify( message );
+
+    if(!wasNotified){
+        return new Response(JSON.stringify({ message: 'internal server error'}), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
+    } 
+    
     return new Response(JSON.stringify({ message: 'done'}), {
         status: 200,
         headers: { "Content-Type": "application/json" },
