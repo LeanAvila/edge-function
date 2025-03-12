@@ -9,7 +9,6 @@ const issueActions = [
     'reopened',
 ];
 
-
 const notify = async ( message: string ) => {
         
     const body = {
@@ -50,9 +49,9 @@ const onIssue = (payload: GitHubIssuePayload): string => {
 export default async (req: Request, context: Context) => {
 
     const githubEvent = req.headers.get('X-GitHub-Event') ?? 'uknown';
-    const payload = await req.json() ?? '{}';
+    const payload = await req.json();
 
-    // console.log(payload)
+    console.log(payload)
 
     let message: string;
     
@@ -79,7 +78,7 @@ export default async (req: Request, context: Context) => {
             headers: { "Content-Type": "application/json" },
         });
     } 
-    
+
     return new Response(JSON.stringify({ message: 'done'}), {
         status: 200,
         headers: { "Content-Type": "application/json" },
