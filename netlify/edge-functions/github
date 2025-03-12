@@ -1,0 +1,17 @@
+// import type { Config, Context } from "@netlify/edge-functions";
+// import { env } from "process";
+
+
+// export default async (request: Request, context: Context) => {
+
+//     const resultado = await notify('Hola mundo desde netlify!');
+
+//     return new Response(JSON.stringify({ message: 'done'}), {
+//         status: 200,
+//         headers: { "Content-Type": "application/json" },
+//     });
+// };
+
+// export const config: Config = {
+//   path: "/discord-github",
+// };
