@@ -1,8 +1,6 @@
 {
   "include" : [
-    "src/**/*.ts", 
-    "interfaces/github-issue.interface.ts", 
-    "interfaces/github-star.interface.ts"
+    "src/**/*.ts"
   ],
   "exclude" : [
     "node_modules",
